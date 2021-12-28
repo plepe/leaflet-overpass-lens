@@ -1,0 +1,19 @@
+{
+  "name": "leaflet-overpass-lens",
+  "version": "0.0.0",
+  "description": "On a Leaflet Map, query an area around the mouse pointer for map items via Overpass API (an OpenStreetMap database server)",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plepe/leaflet-overpass-lens.git"
+  },
+  "author": "Stephan Bösch-Plepelits <skunk@xover.mud.at>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plepe/leaflet-overpass-lens/issues"
+  },
+  "homepage": "https://github.com/plepe/leaflet-overpass-lens#readme"
+}
