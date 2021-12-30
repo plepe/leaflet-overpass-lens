@@ -63,6 +63,19 @@ L.OverpassLens = L.Control.extend({
     this.isShown = true
   },
 
+  updateOptions (options, layerOptions) {
+    this.options = options
+    this.layerOptions = layerOptions
+
+    if (this.isShown) {
+      this.hide()
+      this.layer = null
+      this.show()
+    } else {
+      this.layer = null
+    }
+  },
+
   hide () {
     this.layer.remove()
     this.isShown = false

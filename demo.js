@@ -46,8 +46,23 @@ function start () {
     }
   })
 
-  lens = L.overpassLens(options, layerOptions)
-  lens.addTo(map)
+  if (lens) {
+    lens.updateOptions(options, layerOptions)
+  } else {
+    lens = L.overpassLens(options, layerOptions)
+    lens.addTo(map)
+  }
 }
 
-start()
+function change () {
+  start()
+}
+
+function init () {
+  const form = document.getElementById('options')
+  Array.from(form.elements).forEach(el => el.onchange = () => change())
+
+  start()
+}
+
+init()
