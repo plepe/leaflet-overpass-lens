@@ -7,7 +7,8 @@ const defaultOptions = {
   position: 'topleft',
   continuous: false,
   radius: 100,
-  radiusUnits: 'meters'
+  radiusUnits: 'meters',
+  bufferStyle: { weight: 3, color: '#007fff', fill: false }
 }
 
 L.OverpassLens = L.Control.extend({
@@ -31,7 +32,11 @@ L.OverpassLens = L.Control.extend({
         this.position = e.latlng
 
         if (this.isShown) {
-          this.layer.setBounds(this.geometry(e.latlng))
+          const geom = this.geometry(e.latlng)
+          this.layer.setBounds(geom)
+
+          this.buffer.clearLayers()
+          this.buffer.addData(geom)
         }
       }
     })
@@ -69,14 +74,21 @@ L.OverpassLens = L.Control.extend({
   },
 
   show () {
-    if (!this.layer) {
-      this.layerOptions.bounds = this.geometry(this.position)
+    const geom = this.geometry(this.position)
 
+    if (!this.layer) {
+      this.layerOptions.bounds = geom
       this.layer = new OverpassLayer(this.layerOptions)
+
+      this.buffer = L.geoJSON(geom, this.options.bufferStyle)
     } else {
-      this.layer.setBounds(this.geometry(this.position))
+      this.layer.setBounds(geom)
+
+      this.buffer.clearLayers()
+      this.buffer.addData(geom)
     }
 
+    this.buffer.addTo(this.map)
     this.layer.addTo(this.map)
     this.isShown = true
   },
@@ -97,6 +109,7 @@ L.OverpassLens = L.Control.extend({
 
   hide () {
     this.layer.remove()
+    this.buffer.remove()
     this.isShown = false
   }
 })

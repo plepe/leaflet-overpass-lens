@@ -18,7 +18,8 @@ const options = {
   position: 'topleft', // position of the control
   continuous: false, // if true, lens will follow mouse and update continuously
   radius: 100, // radius around the mouse pointer
-  radiusUnits: 'meters' // units
+  radiusUnits: 'meters' // units,
+  bufferStyle: { weight: 3, color: '#007fff', fill: false } // the visible buffer around the mouse position
 }
 
 // Configure the overlay. For more options, please check https://github.com/plepe/overpass-layer#readme
