@@ -29,10 +29,11 @@
   <textarea name='layerOptions.query'>
 (
 nwr[building];
+nwr[highway];
 )</textarea><br>
   Feature Popup Title:<br>
   <textarea name='layerOptions.feature.title'>
-{{ tags.name }}
+{{ tags.name|default(id) }}
   </textarea><br>
   Feature Popup Body:<br>
   <textarea name='layerOptions.feature.body'>
