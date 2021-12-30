@@ -8,8 +8,8 @@ L.OverpassLens = L.Control.extend({
     position: 'topleft'
   },
 
-  initialize: function (overpassFrontend, options={}) {
-    this.overpassFrontend = overpassFrontend
+  initialize: function (options={}, layerOptions={}) {
+    this.layerOptions = layerOptions
 
     L.Control.prototype.initialize.call(this, options)
     L.setOptions(this, options)
@@ -47,22 +47,14 @@ L.OverpassLens = L.Control.extend({
         type: 'Point',
         coordinates: [ position.lng, position.lat ]
       }
-    }, 200, {units: 'meters'})
+    }, this.options.radius || 200, {units: this.options.radiusUnits || 'meters'})
   },
 
   show () {
     if (!this.layer) {
-      this.layer = new OverpassLayer({
-        overpassFrontend: this.overpassFrontend,
-        bounds: this.geometry(this.position),
-        query: 'nwr[building]',
-        minZoom: 15,
-        feature: {
-          title: '{{ tags.name }}',
-          style: { width: 1, color: 'black' },
-          markerSymbol: ''
-        }
-      })
+      this.layerOptions.bounds = this.geometry(this.position)
+
+      this.layer = new OverpassLayer(this.layerOptions)
     } else {
       this.layer.setBounds(this.geometry(this.position))
     }

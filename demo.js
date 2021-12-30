@@ -12,5 +12,20 @@ const osm_mapnik = L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 )
 osm_mapnik.addTo(map)
 
-const lens = L.overpassLens(overpassFrontend, {})
+const lens = L.overpassLens(
+  {
+    radius: 100,
+    radiusUnits: 'meters'
+  },
+  {
+    overpassFrontend: overpassFrontend,
+    query: 'nwr[building]',
+    minZoom: 15,
+    feature: {
+      title: '{{ tags.name }}',
+      style: { width: 1, color: 'black' },
+      markerSymbol: ''
+    }
+  }
+)
 lens.addTo(map)
