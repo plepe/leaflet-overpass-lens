@@ -4,7 +4,11 @@
   "description": "On a Leaflet Map, query an area around the mouse pointer for map items via Overpass API (an OpenStreetMap database server)",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "browserify -g browserify-css src/index.js -o dist/leaflet-overpass-lens.js",
+    "lint": "standard --fix demo.js src/*.js",
+    "prepare": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "watchify --debug -g browserify-css src/index.js -o dist/leaflet-overpass-lens.js -v"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,15 @@
   "bugs": {
     "url": "https://github.com/plepe/leaflet-overpass-lens/issues"
   },
-  "homepage": "https://github.com/plepe/leaflet-overpass-lens#readme"
+  "homepage": "https://github.com/plepe/leaflet-overpass-lens#readme",
+  "dependencies": {
+    "overpass-layer": "^3.0.2"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "leaflet": "^1.7.1",
+    "overpass-frontend": "^2.6.1",
+    "standard": "^16.0.4",
+    "watchify": "^4.0.0"
+  }
 }
