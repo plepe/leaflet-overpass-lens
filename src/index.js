@@ -3,16 +3,19 @@ const turf = {
   buffer: require('@turf/buffer').default
 }
 
-L.OverpassLens = L.Control.extend({
-  options: {
-    position: 'topleft'
-  },
+const defaultOptions = {
+  position: 'topleft',
+  continuous: false,
+  radius: 100,
+  radiusUnits: 'meters'
+}
 
+L.OverpassLens = L.Control.extend({
   initialize: function (options={}, layerOptions={}) {
     this.layerOptions = layerOptions
 
     L.Control.prototype.initialize.call(this, options)
-    L.setOptions(this, options)
+    L.setOptions(this, defaultOptions)
   },
 
   onAdd: function (map) {
@@ -79,6 +82,7 @@ L.OverpassLens = L.Control.extend({
 
   updateOptions (options, layerOptions) {
     this.options = options
+    L.setOptions(this, defaultOptions)
     this.layerOptions = layerOptions
 
     if (this.isShown) {
