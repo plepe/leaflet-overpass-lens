@@ -12,12 +12,15 @@ const osm_mapnik = L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 )
 osm_mapnik.addTo(map)
 
-const lens = L.overpassLens(
-  {
+let lens
+
+function start () {
+  const options = {
     radius: 100,
     radiusUnits: 'meters'
-  },
-  {
+  }
+
+  const layerOptions = {
     overpassFrontend: overpassFrontend,
     query: 'nwr[building]',
     minZoom: 15,
@@ -27,5 +30,24 @@ const lens = L.overpassLens(
       markerSymbol: ''
     }
   }
-)
-lens.addTo(map)
+
+  const form = document.getElementById('options')
+  Array.from(form.elements).forEach(el => {
+    const path = el.name.split('.')
+
+    if (path[0] === 'options') {
+      options[path[1]] = el.value
+    } else if (path[0] === 'layerOptions') {
+      if (path.length === 3) {
+        layerOptions[path[1]][path[2]] = el.value
+      } else {
+        layerOptions[path[1]] = el.value
+      }
+    }
+  })
+
+  lens = L.overpassLens(options, layerOptions)
+  lens.addTo(map)
+}
+
+start()
