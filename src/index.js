@@ -1,4 +1,7 @@
 const OverpassLayer = require('overpass-layer')
+const turf = {
+  buffer: require('@turf/buffer').default
+}
 
 L.OverpassLens = L.Control.extend({
   options: {
@@ -14,18 +17,22 @@ L.OverpassLens = L.Control.extend({
 
   onAdd: function (map) {
     this.map = map
-    map.on('mousemove', (e) => {
-      if (e) {
-        console.log(e.latlng)
-      }
-    })
 
     const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control-overpass-lens')
     container.innerHTML = '<span>🔍</span>'
     container.title = 'Query map'
 
     container.onclick = () => {
-      this.isShown ? this.hide() : this.show()
+      if (this.isShown) {
+        return this.hide()
+      }
+
+      setTimeout(() => {
+        this.map.once('click', (e) => {
+          this.position = e.latlng
+          this.show()
+        })
+      }, 0)
 
       return false
     }
@@ -33,17 +40,31 @@ L.OverpassLens = L.Control.extend({
     return container
   },
 
+  geometry (position) {
+    return turf.buffer({
+      type:'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [ position.lng, position.lat ]
+      }
+    }, 200, {units: 'meters'})
+  },
+
   show () {
     if (!this.layer) {
       this.layer = new OverpassLayer({
         overpassFrontend: this.overpassFrontend,
+        bounds: this.geometry(this.position),
         query: 'nwr[building]',
         minZoom: 15,
         feature: {
           title: '{{ tags.name }}',
-          style: { width: 1, color: 'black' }
+          style: { width: 1, color: 'black' },
+          markerSymbol: ''
         }
       })
+    } else {
+      this.layer.setBounds(this.geometry(this.position))
     }
 
     this.layer.addTo(this.map)

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/plepe/leaflet-overpass-lens#readme",
   "dependencies": {
+    "@turf/buffer": "^6.5.0",
     "overpass-layer": "^3.0.2"
   },
   "devDependencies": {
