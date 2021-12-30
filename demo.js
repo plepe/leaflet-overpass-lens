@@ -38,7 +38,7 @@ function start () {
     const path = el.name.split('.')
 
     if (path[0] === 'options') {
-      options[path[1]] = el.value
+      options[path[1]] = inputValue(el)
     } else if (path[0] === 'layerOptions') {
       if (path.length === 4) {
         if (!layerOptions[path[1]][path[2]]) {
@@ -48,15 +48,15 @@ function start () {
           layerOptions[path[1]][path[2]][path[3]] = {}
         }
 
-        layerOptions[path[1]][path[2]][path[3]] = el.value
+        layerOptions[path[1]][path[2]][path[3]] = inputValue(el)
       } else if (path.length === 3) {
         if (!layerOptions[path[1]][path[2]]) {
           layerOptions[path[1]][path[2]] = {}
         }
 
-        layerOptions[path[1]][path[2]] = el.value
+        layerOptions[path[1]][path[2]] = inputValue(el)
       } else {
-        layerOptions[path[1]] = el.value
+        layerOptions[path[1]] = inputValue(el)
       }
     }
   })
@@ -78,6 +78,14 @@ function init () {
   Array.from(form.elements).forEach(el => el.onchange = () => change())
 
   start()
+}
+
+function inputValue (element) {
+  if (element.type === 'checkbox') {
+    return !!element.checked
+  }
+
+  return element.value
 }
 
 init()

@@ -12,7 +12,7 @@
 #options {
   position: absolute; left: 0; width: 250px; top: 0; bottom: 0; padding: 0.5em; box-sizing: border-box;
 }
-#options > input,
+#options > input[type=text],
 #options > textarea {
   width: 100%; box-sizing: border-box;
   resize: vertical;
@@ -24,7 +24,7 @@
 
 <form id="options">
   Radius:<br>
-  <input name='options.radius' value='100'><br>
+  <input type='text' name='options.radius' value='100'><br>
   Overpass Query:<br>
   <textarea name='layerOptions.query'>
 (
