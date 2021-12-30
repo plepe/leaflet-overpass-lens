@@ -22,11 +22,13 @@ function start () {
 
   const layerOptions = {
     overpassFrontend: overpassFrontend,
-    query: 'nwr[building]',
+    query: 'nwr',
     minZoom: 15,
     feature: {
-      title: '{{ tags.name }}',
-      style: { width: 1, color: 'black' },
+      body: '',
+      feature: {
+        style: {}
+      },
       markerSymbol: ''
     }
   }
@@ -38,7 +40,20 @@ function start () {
     if (path[0] === 'options') {
       options[path[1]] = el.value
     } else if (path[0] === 'layerOptions') {
-      if (path.length === 3) {
+      if (path.length === 4) {
+        if (!layerOptions[path[1]][path[2]]) {
+          layerOptions[path[1]][path[2]] = {}
+        }
+        if (!layerOptions[path[1]][path[2]][path[3]]) {
+          layerOptions[path[1]][path[2]][path[3]] = {}
+        }
+
+        layerOptions[path[1]][path[2]][path[3]] = el.value
+      } else if (path.length === 3) {
+        if (!layerOptions[path[1]][path[2]]) {
+          layerOptions[path[1]][path[2]] = {}
+        }
+
         layerOptions[path[1]][path[2]] = el.value
       } else {
         layerOptions[path[1]] = el.value

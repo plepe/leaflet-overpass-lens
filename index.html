@@ -15,6 +15,7 @@
 #options > input,
 #options > textarea {
   width: 100%; box-sizing: border-box;
+  resize: vertical;
 }
 </style>
 </head>
@@ -25,7 +26,43 @@
   Radius:<br>
   <input name='options.radius' value='100'><br>
   Overpass Query:<br>
-  <textarea name='layerOptions.query'>nwr[building]</textarea><br>
+  <textarea name='layerOptions.query'>
+(
+nwr[building];
+)</textarea><br>
+  Feature Popup Title:<br>
+  <textarea name='layerOptions.feature.title'>
+{{ tags.name }}
+  </textarea><br>
+  Feature Popup Body:<br>
+  <textarea name='layerOptions.feature.body'>
+&lt;table&gt;
+{% for k, v in tags %}
+  &lt;tr&gt;
+    &lt;td&gt;{{ k }}:&lt;/td&gt;
+    &lt;td&gt;{{ v }}&lt;/td&gt;
+  &lt;/tr&gt;
+{% endfor %}
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;a target="_blank" href="https://openstreetmap.org/{{ type }}/{{ osm_id }}"&gt;more information&lt;/a&gt;
+</textarea>
+  Feature Color:<br>
+  <textarea name='layerOptions.feature.style.color'>
+{% if tags.highway %}
+#ff0000
+{% else %}
+#007fff
+{% endif %}
+  </textarea>
+  Feature Width:<br>
+  <textarea name='layerOptions.feature.style.width'>
+{% if tags.building %}
+1
+{% else %}
+3
+{% endif %}
+  </textarea>
 </form>
 <div id="map" style="position: absolute; left: 250px; right: 0; top: 0; bottom: 0;"></div>
 <script src="demo.js"></script>
