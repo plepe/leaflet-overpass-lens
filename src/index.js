@@ -5,8 +5,8 @@ L.OverpassLens = L.Control.extend({
     position: 'topleft'
   },
 
-  initialize: function (overpass, options={}) {
-    this.overpass = overpass
+  initialize: function (overpassFrontend, options={}) {
+    this.overpassFrontend = overpassFrontend
 
     L.Control.prototype.initialize.call(this, options)
     L.setOptions(this, options)
@@ -24,11 +24,35 @@ L.OverpassLens = L.Control.extend({
     container.innerHTML = '<span>🔍</span>'
     container.title = 'Query map'
 
-    container.onclick = function () {
+    container.onclick = () => {
+      this.isShown ? this.hide() : this.show()
+
       return false
     }
 
     return container
+  },
+
+  show () {
+    if (!this.layer) {
+      this.layer = new OverpassLayer({
+        overpassFrontend: this.overpassFrontend,
+        query: 'nwr[building]',
+        minZoom: 15,
+        feature: {
+          title: '{{ tags.name }}',
+          style: { width: 1, color: 'black' }
+        }
+      })
+    }
+
+    this.layer.addTo(this.map)
+    this.isShown = true
+  },
+
+  hide () {
+    this.layer.remove()
+    this.isShown = false
   }
 })
 
