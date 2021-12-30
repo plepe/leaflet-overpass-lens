@@ -14,8 +14,9 @@ L.OverpassLens = L.Control.extend({
   initialize: function (options={}, layerOptions={}) {
     this.layerOptions = layerOptions
 
+    this.options = defaultOptions
+    L.setOptions(this, options)
     L.Control.prototype.initialize.call(this, options)
-    L.setOptions(this, defaultOptions)
   },
 
   onAdd: function (map) {
@@ -81,8 +82,8 @@ L.OverpassLens = L.Control.extend({
   },
 
   updateOptions (options, layerOptions) {
-    this.options = options
-    L.setOptions(this, defaultOptions)
+    this.options = defaultOptions
+    L.setOptions(this, options)
     this.layerOptions = layerOptions
 
     if (this.isShown) {

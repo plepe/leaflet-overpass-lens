@@ -13,6 +13,7 @@ const overpassFrontend = new OverpassFrontend(overpassURL)
 
 const map = L.map('map').setView([51.505, -0.09], 15)
 
+// you can omit these values; shown are the default values.
 const options = {
   position: 'topleft', // position of the control
   continuous: false, // if true, lens will follow mouse and update continuously
