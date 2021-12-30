@@ -16,6 +16,7 @@ let lens
 
 function start () {
   const options = {
+    continuous: false,
     radius: 100,
     radiusUnits: 'meters'
   }

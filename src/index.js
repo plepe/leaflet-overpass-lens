@@ -22,16 +22,30 @@ L.OverpassLens = L.Control.extend({
     container.innerHTML = '<span>🔍</span>'
     container.title = 'Query map'
 
+    this.map.on('mousemove', (e) => {
+      if (e && this.options.continuous) {
+        this.position = e.latlng
+
+        if (this.isShown) {
+          this.layer.setBounds(this.geometry(e.latlng))
+        }
+      }
+    })
+
     container.onclick = () => {
       if (this.isShown) {
         return this.hide()
       }
 
       setTimeout(() => {
-        this.map.once('click', (e) => {
-          this.position = e.latlng
+        if (this.options.continuous) {
           this.show()
-        })
+        } else {
+          this.map.once('click', (e) => {
+            this.position = e.latlng
+            this.show()
+          })
+        }
       }, 0)
 
       return false
