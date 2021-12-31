@@ -54,7 +54,12 @@ L.OverpassLens = L.Control.extend({
         if (this.options.continuous) {
           this.show()
         } else {
+          const origCursor = this.map._container.style.cursor
+          this.map._container.style.cursor = 'help'
+
           this.map.once('click', (e) => {
+            this.map._container.style.cursor = origCursor
+
             this.position = e.latlng
             this.show()
           })
