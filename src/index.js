@@ -6,6 +6,7 @@ const turf = {
 const defaultOptions = {
   position: 'topleft',
   continuous: false,
+  icon: '<span>🔍</span>',
   radius: 100,
   radiusUnits: 'meters',
   bufferStyle: { weight: 3, color: '#007fff', fill: false }
@@ -24,8 +25,11 @@ L.OverpassLens = L.Control.extend({
     this.map = map
 
     const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control-overpass-lens')
-    container.innerHTML = '<span>🔍</span>'
-    container.title = 'Query map'
+    const containerLink = document.createElement('a')
+    containerLink.href = '#'
+    containerLink.innerHTML = this.options.icon
+    containerLink.title = 'Query map'
+    container.appendChild(containerLink)
 
     this.map.on('mousemove', (e) => {
       if (e && this.options.continuous) {
@@ -41,7 +45,7 @@ L.OverpassLens = L.Control.extend({
       }
     })
 
-    container.onclick = () => {
+    containerLink.onclick = () => {
       if (this.isShown) {
         return this.hide()
       }

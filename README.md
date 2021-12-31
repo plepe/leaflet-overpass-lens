@@ -17,6 +17,7 @@ const map = L.map('map').setView([51.505, -0.09], 15)
 const options = {
   position: 'topleft', // position of the control
   continuous: false, // if true, lens will follow mouse and update continuously
+  icon: '<span>🔍</span>', // which icon to use on the control
   radius: 100, // radius around the mouse pointer
   radiusUnits: 'meters' // units,
   bufferStyle: { weight: 3, color: '#007fff', fill: false } // the visible buffer around the mouse position
