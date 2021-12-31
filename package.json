@@ -22,12 +22,12 @@
   "homepage": "https://github.com/plepe/leaflet-overpass-lens#readme",
   "dependencies": {
     "@turf/buffer": "^6.5.0",
-    "overpass-layer": "^3.0.2"
+    "overpass-layer": "^3.1.0"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
     "leaflet": "^1.7.1",
-    "overpass-frontend": "^2.6.1",
+    "overpass-frontend": "^2.7.0",
     "standard": "^16.0.4",
     "watchify": "^4.0.0"
   }
