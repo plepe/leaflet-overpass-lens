@@ -1,6 +1,6 @@
 {
   "name": "leaflet-overpass-lens",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "On a Leaflet Map, query an area around the mouse pointer for map items via Overpass API (an OpenStreetMap database server)",
   "main": "src/index.js",
   "scripts": {
