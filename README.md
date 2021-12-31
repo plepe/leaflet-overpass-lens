@@ -1,6 +1,8 @@
 # leaflet-overpass-lens
 On a Leaflet Map, query an area around the mouse pointer for map items via Overpass API (an OpenStreetMap database server)
 
+-> [DEMO](https://xover.mud.at/~skunk/leaflet-overpass-lens/)
+
 ## Screenshot
 ![Screenshot of the demo application, showing the configuration on the left side. On the right side a map with buildings and roads intersecting the selected lens.](screenshot.png)
 
