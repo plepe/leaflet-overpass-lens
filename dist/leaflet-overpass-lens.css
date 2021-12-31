@@ -1,0 +1,6 @@
+.leaflet-control-overpass-lens.enabled > a {
+  background: blue;
+}
+.leaflet-control-overpass-lens.active > a {
+  background: red;
+}

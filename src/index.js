@@ -30,6 +30,7 @@ L.OverpassLens = L.Control.extend({
     containerLink.innerHTML = this.options.icon
     containerLink.title = 'Query map'
     container.appendChild(containerLink)
+    this.container = container
 
     this.map.on('mousemove', (e) => {
       if (e && this.options.continuous) {
@@ -56,6 +57,7 @@ L.OverpassLens = L.Control.extend({
         } else {
           const origCursor = this.map._container.style.cursor
           this.map._container.style.cursor = 'help'
+          container.classList.add('enabled')
 
           this.map.once('click', (e) => {
             this.map._container.style.cursor = origCursor
@@ -83,6 +85,9 @@ L.OverpassLens = L.Control.extend({
   },
 
   show () {
+    this.container.classList.remove('enabled')
+    this.container.classList.add('active')
+
     const geom = this.geometry(this.position)
 
     if (!this.layer) {
@@ -117,6 +122,9 @@ L.OverpassLens = L.Control.extend({
   },
 
   hide () {
+    this.container.classList.remove('enabled')
+    this.container.classList.remove('active')
+
     this.layer.remove()
     this.buffer.remove()
     this.isShown = false
