@@ -1,3 +1,4 @@
+/* global L:false */
 const OverpassLayer = require('overpass-layer')
 const turf = {
   buffer: require('@turf/buffer').default
@@ -13,7 +14,7 @@ const defaultOptions = {
 }
 
 L.OverpassLens = L.Control.extend({
-  initialize: function (options={}, layerOptions={}) {
+  initialize: function (options = {}, layerOptions = {}) {
     this.layerOptions = layerOptions
 
     this.options = defaultOptions
@@ -76,12 +77,12 @@ L.OverpassLens = L.Control.extend({
 
   geometry (position) {
     return turf.buffer({
-      type:'Feature',
+      type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: [ position.lng, position.lat ]
+        coordinates: [position.lng, position.lat]
       }
-    }, this.options.radius || 200, {units: this.options.radiusUnits || 'meters'})
+    }, this.options.radius || 200, { units: this.options.radiusUnits || 'meters' })
   },
 
   show () {
