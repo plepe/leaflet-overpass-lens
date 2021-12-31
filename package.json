@@ -10,6 +10,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "watchify --debug -g browserify-css src/index.js -o dist/leaflet-overpass-lens.js -v"
   },
+  "files": [
+    "src",
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plepe/leaflet-overpass-lens.git"
