@@ -9,6 +9,7 @@
     "prepare": "npm run build",
     "prepublish": "npm run build && npm run lint",
     "preversion": "npm run build && npm run lint",
+    "start": "http-server ./",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "watchify --debug -g browserify-css src/index.js -o dist/leaflet-overpass-lens.js -v"
   },
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "browserify": "^17.0.0",
+    "http-server": "^14.0.0",
     "leaflet": "^1.7.1",
     "overpass-frontend": "^2.7.0",
     "standard": "^16.0.4",

@@ -9,6 +9,18 @@ On a Leaflet Map, query an area around the mouse pointer for map items via Overp
 See also this short screencast: https://youtu.be/JTzVa9E0Yo8
 
 ## Usage
+### Use demo application
+```sh
+git clone https://github.com/plepe/leaflet-overpass-lens
+cd leaflet-overpass-lens
+npm install
+npm start
+```
+
+Visit http://localhost:8080
+
+For developing, additionally run `npm run watch`. This will include debug information in the compiled package (you can use the browser developer tools for debugging) and will re-compile whenever the code changes.
+
 ### Plain HTML/JS
 Run on a shell:
 ```sh
