@@ -7,7 +7,7 @@
     "build": "browserify -g browserify-css src/index.js -o dist/leaflet-overpass-lens.js",
     "lint": "standard --fix demo.js src/*.js",
     "prepare": "npm run build",
-    "prepublish": "npm run build && npm run lint",
+    "prepublishOnly": "npm run build && npm run lint",
     "preversion": "npm run build && npm run lint",
     "start": "http-server ./",
     "test": "echo \"Error: no test specified\" && exit 1",
